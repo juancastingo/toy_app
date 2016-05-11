@@ -2,6 +2,7 @@
 
 <h1>Listing Users</h1>
 
+
 <table>
   <thead>
     <tr>
@@ -11,19 +12,45 @@
     </tr>
   </thead>
 
-  <tbody>
+  <tbody id="users">
+    
     <% @users.each do |user| %>
-      <tr>
-        <td><%= user.name %></td>
-        <td><%= user.email %></td>
-        <td><%= link_to 'Show', user %></td>
-        <td><%= link_to 'Edit', edit_user_path(user) %></td>
-        <td><%= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
+      <tr >
+         <td><%= user.name %></td>
+         <td><%= user.email %></td>
+         <td><%= link_to 'edit', edit_user_path(user) %></td>
+         <td><%= link_to 'Show', user %></td>
+         <td><%= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+     </tr>
     <% end %>
+
   </tbody>
 </table>
+ 
+
+
+ <br>
+<hr>
+<br>
+<h3>New</h3>
+<div id="response_data"></div>
+ 
+<%= form_for(@user, remote: true, :html => {:id => "ajax_trigger"}) do |f| %>
+  <%= f.label :name %><br>
+  <%= f.text_field :name %><br>
+  <%= f.label :email %><br>
+  <%= f.text_field :email %><br>
+  <%= f.submit %>
+<% end %>
+
 
 <br>
+<hr>
+
+
+
+
+
+
 
 <%= link_to 'New User', new_user_path %>
